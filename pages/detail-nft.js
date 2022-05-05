@@ -1,4 +1,4 @@
-/* pages/resell-nft.js */
+/* pages/detail-nft.js */
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
@@ -11,13 +11,13 @@ import {
 
 import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 
-export default function ResellNFT() {
+export default function DetailNFT() {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
-  const [formInput, updateFormInput] = useState({ price: '', image: '' })
+  const [formInput, updateFormInput] = useState({ price: '', image: '', name: '', description: ''})
   const router = useRouter()
-  const { id, tokenURI } = router.query
-  const { image, price } = formInput
+  const { id, tokenURI, prev } = router.query
+  const { image, price, name, description } = formInput
 
   useEffect(() => {
     loadNFTs()
@@ -61,11 +61,11 @@ export default function ResellNFT() {
   async function fetchNFT() {
     if (!tokenURI) return
     const meta = await axios.get(tokenURI)
-    updateFormInput(state => ({ ...state, image: meta.data.image }))
+    updateFormInput(state => ({ ...state, image: meta.data.image, name: meta.data.name, description: meta.data.description }))
   }
 
-  function myNFTs() {
-    router.push(`/my-nfts`)
+  function back() {
+    router.push(`/${prev}`)
   }
 
 
@@ -73,24 +73,25 @@ export default function ResellNFT() {
   return (
     <div className="flex justify-center">
       <div className="w-1/2 flex flex-col pb-12">
-      <img className="rounded mt-4 grid-cols-1" width="100%" src={image} />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4"></div>
-      {
-      nfts.filter(nft => nft.tokenId == id).map((nft, i) => (
-        <div key={i} className="border shadow rounded-xl overflow-hidden">
-          <div className="p-4 bg-white">
-          <p className="text-2xl font-bold text-black">Name: {nft.name}</p>
-          <p className="text-2xl font-bold text-black">Description: {nft.description}</p>
-          <p className="text-2xl font-bold text-black">Price: {nft.price}</p>
-          <p className="text-2xl font-bold text-black">Owner: {nft.owner}</p>
-          <p className="text-2xl font-bold text-black">Seller: {nft.seller}</p>
-          <p className="text-2xl font-bold text-black">Token ID: {nft.tokenId}</p>
-          </div>
-        </div>
-      ))
-      }
+      <img className="rounded mt-4 grid-cols-1" width="100%" src={image} />
+      <div className="border shadow rounded-xl overflow-hidden">
+        <p className="text-xl font-bold text-black">Detail NFT: </p>
+        <p className="text-xl text-black"> Name: {name} </p>
+        <p className="text-xl text-black"> Description: {description} </p>
+        {
+        nfts.filter(nft => nft.tokenId == id).map((nft, i) => (
+            <div>
+            <p className="text-xl text-black">Token ID: {nft.tokenId}</p>
+            <p className="text-xl text-black">Price: {nft.price} ETH</p>
+            <p className="text-xl text-black">Owner: {nft.owner}</p>
+            <p className="text-xl text-black">Seller: {nft.seller}</p>
+            </div>
+        ))
+        }
+      </div>
 
-      <button onClick={myNFTs} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
+      <button onClick={back} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
           Back
       </button>
       </div>

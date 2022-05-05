@@ -69,7 +69,7 @@ export default function Home() {
     loadNFTs()
   }
   function detailNFT(nft) {
-    router.push(`/detail-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
+    router.push(`/detail-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}&prev=`)
   }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
   return (

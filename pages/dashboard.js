@@ -48,8 +48,13 @@ export default function CreatorDashboard() {
     setNfts(items)
     setLoadingState('loaded') 
   }
+  /**
+   * Detail NFT
+   * 
+   * @param {nft} nft 
+   */
   function detailNFT(nft) {
-    router.push(`/detail-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
+    router.push(`/detail-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}&prev=dashboard`)
   }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No NFTs listed</h1>)
   return (
