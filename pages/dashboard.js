@@ -45,6 +45,9 @@ export default function CreatorDashboard() {
     setNfts(items)
     setLoadingState('loaded') 
   }
+  function detailNFT(nft) {
+    router.push(`/detail-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
+  }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No NFTs listed</h1>)
   return (
     <div>
@@ -57,6 +60,7 @@ export default function CreatorDashboard() {
                 <img src={nft.image} className="rounded" />
                 <div className="p-4 bg-black">
                   <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
+                  <button className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => detailNFT(nft)}>Detail</button>
                 </div>
               </div>
             ))

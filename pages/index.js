@@ -60,6 +60,9 @@ export default function Home() {
     await transaction.wait()
     loadNFTs()
   }
+  function detailNFT(nft) {
+    router.push(`/detail-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
+  }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
   return (
     <div className="flex justify-center">
@@ -78,6 +81,7 @@ export default function Home() {
                 <div className="p-4 bg-black">
                   <p className="text-2xl font-bold text-white">{nft.price} ETH</p>
                   <button className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
+                  <button className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => detailNFT(nft)}>Detail</button>
                 </div>
               </div>
             ))
