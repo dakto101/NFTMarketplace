@@ -48,6 +48,8 @@ export default function ResellNFT() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
+        description: meta.data.description,
+        name: meta.data.name,
         tokenURI
       }
       return item
@@ -77,6 +79,8 @@ export default function ResellNFT() {
       nfts.filter(nft => nft.tokenId == id).map((nft, i) => (
         <div key={i} className="border shadow rounded-xl overflow-hidden">
           <div className="p-4 bg-white">
+          <p className="text-2xl font-bold text-black">Name: {nft.name}</p>
+          <p className="text-2xl font-bold text-black">Description: {nft.description}</p>
           <p className="text-2xl font-bold text-black">Price: {nft.price}</p>
           <p className="text-2xl font-bold text-black">Owner: {nft.owner}</p>
           <p className="text-2xl font-bold text-black">Seller: {nft.seller}</p>

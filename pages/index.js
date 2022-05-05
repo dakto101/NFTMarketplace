@@ -3,6 +3,7 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
+import { useRouter } from 'next/router'
 
 import {
   marketplaceAddress
@@ -16,6 +17,12 @@ export default function Home() {
   useEffect(() => {
     loadNFTs()
   }, [])
+
+  const router = useRouter()
+  useEffect(() => {
+    loadNFTs()
+  }, [])
+
   async function loadNFTs() {
     /* create a generic provider and query for unsold market items */
     const provider = new ethers.providers.JsonRpcProvider()
@@ -38,6 +45,7 @@ export default function Home() {
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
+        tokenURI : tokenUri
       }
       return item
     }))

@@ -3,6 +3,7 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
+import { useRouter } from 'next/router'
 
 import {
   marketplaceAddress
@@ -16,6 +17,7 @@ export default function CreatorDashboard() {
   useEffect(() => {
     loadNFTs()
   }, [])
+  const router = useRouter()
   async function loadNFTs() {
     const web3Modal = new Web3Modal({
       network: 'mainnet',
@@ -38,6 +40,7 @@ export default function CreatorDashboard() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
+        tokenURI : tokenUri
       }
       return item
     }))
