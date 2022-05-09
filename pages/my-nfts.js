@@ -67,6 +67,7 @@ export default function MyAssets() {
     </div>
     <div className="flex">
       <div className="p-4" style={{ maxWidth: '1600px' }}>
+      <h2 className="text-2xl py-2">My NFTs</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.filter(nft => nft.name.toLowerCase().includes(searchTerm.toLowerCase())).map((nft, i) => (
