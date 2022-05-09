@@ -12,6 +12,7 @@ import {
 import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
 
 export default function CreatorDashboard() {
+  const [searchTerm, setSearchTerm] = useState("");
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   useEffect(() => {
@@ -40,6 +41,8 @@ export default function CreatorDashboard() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
+        name: meta.data.name,
+        description: meta.data.description,
         tokenURI : tokenUri
       }
       return item
@@ -59,15 +62,28 @@ export default function CreatorDashboard() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No NFTs listed</h1>)
   return (
     <div>
+    <div class="w-full m-3 max-w-xs border-solid border-2 border-gray">
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="search" placeholder="Search..."
+      onChange={(event) => {
+        setSearchTerm(event.target.value)
+      } } />
+    </div>
+    <div>
       <div className="p-4">
         <h2 className="text-2xl py-2">Items Listed</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
-            nfts.map((nft, i) => (
+            nfts.filter(nft => nft.name.toLowerCase().includes(searchTerm.toLowerCase())).map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
                 <img src={nft.image} className="rounded" />
+                <div className="p-4">
+                  <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
+                  <div style={{ height: '70px', overflow: 'hidden' }}>
+                    <p className="text-gray-400">{nft.description}</p>
+                  </div>
+                </div>
                 <div className="p-4 bg-black">
-                  <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
+                <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                   <button className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => detailNFT(nft)}>Detail</button>
                 </div>
               </div>
@@ -75,6 +91,7 @@ export default function CreatorDashboard() {
           }
         </div>
       </div>
+    </div>
     </div>
   )
 }
