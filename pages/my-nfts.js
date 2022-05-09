@@ -65,8 +65,8 @@ export default function MyAssets() {
         setSearchTerm(event.target.value)
       } } />
     </div>
-    <div className="flex justify-center">
-      <div className="p-4">
+    <div className="flex">
+      <div className="p-4" style={{ maxWidth: '1600px' }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.filter(nft => nft.name.toLowerCase().includes(searchTerm.toLowerCase())).map((nft, i) => (

@@ -69,7 +69,7 @@ export default function CreatorDashboard() {
       } } />
     </div>
     <div>
-      <div className="p-4">
+      <div className="p-4" style={{ maxWidth: '1600px' }}>
         <h2 className="text-2xl py-2">Items Listed</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
