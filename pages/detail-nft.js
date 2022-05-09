@@ -77,7 +77,7 @@ export default function DetailNFT() {
         <p className="text-xl text-black"> Name: {name} </p>
         <p className="text-xl text-black"> Description: {description} </p>
         {
-        nfts.map((nft, i) => (
+        nfts.filter(nft => nft.tokenId == id).map((nft, i) => (
             <div>
             <p className="text-xl text-black">Token ID: {nft.tokenId}</p>
             <p className="text-xl text-black">Price: {nft.price} ETH</p>
