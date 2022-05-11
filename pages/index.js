@@ -109,12 +109,10 @@ export default function Home() {
               .map((nft, i) => (
                 <div
                   key={i}
-                  className="border shadow rounded-xl overflow-hidden flex flex-col"
+                  className="border shadow rounded-xl overflow-hidden"
                 >
-                  <div className="h-1/2 bg-cover">
-                    <img src={nft.image} />
-                  </div>
-                  <div className="h-1/4 p-4">
+                  <img src={nft.image} />
+                  <div className="p-4">
                     <p
                       style={{ height: "64px" }}
                       className="text-2xl font-semibold"
@@ -125,7 +123,7 @@ export default function Home() {
                       <p className="text-gray-400">{nft.description}</p>
                     </div>
                   </div>
-                  <div className="h-1/4 p-4 bg-black">
+                  <div className="p-4 bg-black">
                     <p className="text-2xl font-bold text-white">
                       {nft.price} ETH
                     </p>
